@@ -14,7 +14,6 @@ const mockEpisodes: Episode[] = [
     { id: 'ep2', title: 'Episodio 1: El ataque de los clones', audioUrl: "", description: "", date: '07/05/2026', duration: '45:00' },
 ];
 
-// 2. Mock del Router
 const router = createRouter({
     history: createWebHistory(),
     routes: [

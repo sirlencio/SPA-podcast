@@ -36,7 +36,7 @@ describe('Integración Home y PodcastList', () => {
 
     it('debe renderizar tantas tarjetas como podcasts haya en el store', async () => {
         const store = usePodcastStore();
-        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => {});
+        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => { });
 
         store.podcasts = mockPodcasts;
         store.loading = false;
@@ -57,7 +57,7 @@ describe('Integración Home y PodcastList', () => {
 
     it('debe reducir los resultados visibles cuando el buscador filtra', async () => {
         const store = usePodcastStore();
-        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => {});
+        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => { });
 
         store.podcasts = mockPodcasts;
         store.loading = false;
@@ -80,8 +80,8 @@ describe('Integración Home y PodcastList', () => {
 
     it('debe mostrar el mensaje de "no resultados" si el filtro no coincide', async () => {
         const store = usePodcastStore();
-        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => {});
-        
+        vi.spyOn(store, 'fetchTopPodcasts').mockImplementation(async () => { });
+
         store.podcasts = mockPodcasts;
         store.loading = false;
 

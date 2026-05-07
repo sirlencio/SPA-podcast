@@ -31,9 +31,9 @@ describe('Podcast Detail', () => {
 
     it('debe renderizar la informacion correcta del podcast cuando existe en el store', async () => {
         const store = usePodcastStore();
-        
-        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => {});
-        
+
+        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => { });
+
         store.podcasts = [mockPodcast];
 
         const wrapper = mount(PodcastDetail, {
@@ -53,8 +53,8 @@ describe('Podcast Detail', () => {
 
     it('no debe renderizar nada si el podcast no se encuentra', () => {
         const store = usePodcastStore();
-        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => {});
-        
+        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => { });
+
         store.podcasts = [];
 
         const wrapper = mount(PodcastDetail, {
@@ -68,7 +68,7 @@ describe('Podcast Detail', () => {
 
     it('los enlaces deben apuntar a la ruta correcta del podcast', async () => {
         const store = usePodcastStore();
-        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => {});
+        vi.spyOn(store, 'loadFromLocalStorage').mockImplementation(() => { });
         store.podcasts = [mockPodcast];
 
         const wrapper = mount(PodcastDetail, {
@@ -78,7 +78,7 @@ describe('Podcast Detail', () => {
         });
 
         const links = wrapper.findAllComponents({ name: 'RouterLink' });
-        
+
         links.forEach(link => {
             expect(link.props().to).toMatchObject({
                 name: 'podcast',
