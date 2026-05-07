@@ -9,13 +9,13 @@ Para evitar la dependencia de servicios externos (como AllOrigins o CORS-Anywher
 *   **En producción:** Se han configurado Vercel Rewrites a través del archivo `vercel.json`. Esto permite que las peticiones se realicen al mismo dominio de la aplicación y sea el servidor de Vercel quien actúe como puente con la API de iTunes, eliminando los bloqueos de CORS de manera eficiente y profesional.
 ### 2. Estrategia de Caché y Persistencia
 Se ha implementado un sistema de caché personalizado en LocalStorage gestionado desde los stores de **Pinia**:
-*   **Timestamping**: Cada entrada en el caché incluye una marca de tiempo (`lastFetched`).
+*   **Timestamping**: Cada entrada en el caché incluye una marca de tiempo (`lastUpdated`).
 *   **Validación**: Antes de realizar cualquier petición de red, la aplicación verifica si han pasado más de **24 horas**. Si los datos son válidos, se sirven desde el almacenamiento local, optimizando el rendimiento y reduciendo el consumo de API.
 
 ### 3. Arquitectura y Desacoplamiento
 
 Se ha priorizado la separación de responsabilidades:
-*   **Business Logic**: Toda la lógica de filtrado, formateo de datos y gestión de estado se ha movido fuera de las vistas hacia los Pinia Stores.
+*   **Business Logic**: Toda la lógica de filtrado y formateo de datos se ha movido fuera de las vistas.
 *   **Componentes Atómicos**: Los componentes son puramente representativos, lo que facilita su mantenimiento y testeo.
 
 ### 4. Estilos con SASS
