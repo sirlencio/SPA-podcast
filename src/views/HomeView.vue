@@ -31,7 +31,12 @@ function updateFilterText(newFilterText: string) {
       <SearchBar :count="filteredPodcasts.length" @filter="updateFilterText" />
     </div>
 
-    <PodcastList :podcasts="filteredPodcasts" />
+    <PodcastList v-if="filteredPodcasts.length > 0" :podcasts="filteredPodcasts" />
+
+    <div v-else-if="!podcastStore.loading" class="no-results">
+      <p>No se han encontrado podcasts que coincidan con tu búsqueda.</p>
+    </div>
+
   </div>
 </template>
 
@@ -45,6 +50,20 @@ function updateFilterText(newFilterText: string) {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 40px;
+  }
+
+  .no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    text-align: center;
+
+    p {
+      font-size: 1.2rem;
+      color: #666;
+      font-style: italic;
+    }
   }
 }
 </style>
