@@ -52,6 +52,8 @@ const episode = computed(() => {
     }
 
     .description {
+        overflow-wrap: break-word;
+        word-break: break-word;
         font-size: 1rem;
         line-height: 1.6;
         color: #555;

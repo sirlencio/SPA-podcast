@@ -30,6 +30,7 @@ import PodcastDetail from '../components/Podcast/PodcastDetail.vue';
 
   .right-panel {
     flex: 1;
+    min-width: 0;
   }
 }
 </style>
