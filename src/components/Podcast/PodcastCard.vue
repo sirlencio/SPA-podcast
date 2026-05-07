@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { Podcast } from '../types/Podcast';
+import type { Podcast } from '../../types/Podcast';
+
 defineProps<{ podcast: Podcast }>();
 </script>
 

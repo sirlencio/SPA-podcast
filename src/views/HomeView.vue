@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { usePodcastStore } from '../stores/usePodcastStore';
-import PodcastList from '../components/PodcastList.vue';
+import PodcastList from '../components/Podcast/PodcastList.vue';
 import SearchBar from '../components/SearchBar.vue';
 
 const podcastStore = usePodcastStore();

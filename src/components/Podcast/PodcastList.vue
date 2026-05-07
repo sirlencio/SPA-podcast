@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PodcastCard from './PodcastCard.vue';
-import type { Podcast } from '../types/Podcast';
+import type { Podcast } from '../../types/Podcast';
 
 defineProps<{ podcasts: Podcast[] }>();
 </script>
