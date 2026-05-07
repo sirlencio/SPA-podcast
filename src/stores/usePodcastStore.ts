@@ -2,6 +2,7 @@ import { ref } from "vue";
 import type { Podcast } from "../types/Podcast"
 import { defineStore } from "pinia";
 import { mapPodcasts } from "../utils/mapper";
+import { shouldFetch } from "../utils/cache";
 
 export const usePodcastStore = defineStore('podcasts', () => {
     const podcasts = ref<Podcast[]>([]);
@@ -9,11 +10,11 @@ export const usePodcastStore = defineStore('podcasts', () => {
     const lastUpdated = ref<number | null>(null);
 
     const fetchTopPodcasts = async () => {
-        const now = Date.now();
-
-        if (podcasts.value.length > 0 && lastUpdated.value && (now - lastUpdated.value < 86400000)) {
+        if (!shouldFetch(lastUpdated.value ?? undefined, podcasts.value.length > 0)) {
             return;
         }
+
+        const now = Date.now();
 
         try {
             loading.value = true;
@@ -23,8 +24,8 @@ export const usePodcastStore = defineStore('podcasts', () => {
             const data = await response.json();
 
             podcasts.value = mapPodcasts(data.feed.entry);
-
             lastUpdated.value = now;
+            
             saveToLocalStorage();
         } catch (err) {
             console.error("Error fetching podcasts:", err);

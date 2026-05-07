@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue';
 import { usePodcastStore } from '../stores/usePodcastStore';
 import PodcastList from '../components/Podcast/PodcastList.vue';
 import SearchBar from '../components/SearchBar.vue';
+import { filterPodcasts } from '../utils/filterPodcasts';
 
 const podcastStore = usePodcastStore();
 const filterText = ref('');
@@ -13,11 +14,7 @@ onMounted(async () => {
 });
 
 const filteredPodcasts = computed(() => {
-  const query = filterText.value.toLowerCase();
-  return podcastStore.podcasts.filter(p =>
-    p.name.toLowerCase().includes(query) ||
-    p.artist.toLowerCase().includes(query)
-  );
+  return filterPodcasts(podcastStore.podcasts, filterText.value)
 });
 
 function updateFilterText(newFilterText: string) {

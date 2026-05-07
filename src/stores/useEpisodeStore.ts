@@ -2,21 +2,22 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import type { Episode } from "../types/Episode";
 import { mapEpisodes } from "../utils/mapper";
+import { shouldFetch } from "../utils/cache";
 
 export const useEpisodeStore = defineStore('detail', () => {
     const podcastCache = ref<Record<string, { episodes: Episode[], lastUpdated: number }>>({});
     const loading = ref(false);
 
     const fetchEpisodes = async (podcastId: string) => {
-        const now = Date.now();
-
-        if (Object.keys(podcastCache.value).length === 0) {
+        if (!podcastCache.value[podcastId]) {
             const saved = localStorage.getItem('podcast_detail_storage');
             if (saved) podcastCache.value = JSON.parse(saved);
         }
 
         const cached = podcastCache.value[podcastId];
-        if (cached && (now - cached.lastUpdated < 86400000)) return;
+        if (!shouldFetch(cached?.lastUpdated, !!cached)) return;
+
+        const now = Date.now();
 
         try {
             loading.value = true;
